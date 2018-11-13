@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
@@ -32,10 +32,11 @@ def inicio():
 def cadastrar():
     return render_template('cadastrar.html',titulo="Cadastrar")
 
-@app.route('/editar')
+@app.route('/editar',methods=['GET'])
 def editar():
+    id = str(request.args.get('id'))
     sessionSQL = Session()
-    pessoa = sessionSQL.query(Pessoa).filter(id==id())
+    pessoa = sessionSQL.query(Pessoa).filter(Pessoa.idPessoa==id).first()
     sessionSQL.close()
     return render_template('editar.html',titulo="Editar", dados_pessoa = pessoa)
 
