@@ -1,0 +1,21 @@
+{% extends'base.html' %}
+
+{% block content %}
+
+    <h2>Listar</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ação</th>
+        </tr>
+        {% for linha in lista_pessoas %}
+            <tr>
+                <td>{{ linha.idPessoa }}</td>
+                <td>{{ linha.nome }}</td>
+                <td><a href="/editar?id={{ linha.idPessoa }}">Editar</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{%  endblock %}
